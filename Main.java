@@ -1,7 +1,5 @@
-/** 
-created on 27/5/19
-**/
 package array_List;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -12,7 +10,7 @@ public class Main {
 		int choice=0;
 		printInstructions();
 		while(!quit) {
-			System.out.println("Eneter choices : ");
+			System.out.println("Enter choices : ");
 			choice=sc.nextInt();
 			sc.nextLine();
 			switch(choice)
@@ -36,6 +34,8 @@ public class Main {
 				searchitem();
 				break;
 			case 6:
+				processArrayList();
+			case 7:
 				quit=true;
 				break;
 			}
@@ -61,27 +61,30 @@ public class Main {
 		grocerylist.printGroceryItem();
 	}
 	public static void modifyitem() {
-		System.out.println("Enter item number : ");
-		int pos=sc.nextInt();
-		sc.nextLine();
-		System.out.println("Enetr replacement item: ");
+		System.out.println("Enter item to remove : ");
+		String item=sc.nextLine();
+		System.out.println("Eneter replacement item: ");
 		String newitem=sc.nextLine();
-		grocerylist.modifyItemInList(pos-1, newitem);
+		grocerylist.modifyItemInList(item,newitem);
+		System.out.println("Grocery Item "+item+" has beeen modified.");
 	}
 	public static void removeitem() {
-		System.out.println("enter item number to remove : ");
-		int itemNo=sc.nextInt();
-		sc.nextLine();
-		grocerylist.removeItem(itemNo-1);
+		System.out.println("enter item to remove : ");
+		String item=sc.nextLine();
+		grocerylist.removeItem(item);
 	}
 	public static void searchitem() {
 		System.out.println("Enter item to search in the list :");
 		String searchitem=sc.nextLine();
-		if(grocerylist.searchItem(searchitem)!=null) {
+		if(grocerylist.inList(searchitem)) {
 			System.out.println("found "+searchitem+" in the grocrylist");
 		}else {
 			System.out.println("Item not found.");
 		}
+	}
+	public static void processArrayList() {
+		ArrayList<String> newList=new ArrayList<String>();
+		newList.addAll(grocerylist.getGroceryList());//method to copy entire content of array list
 	}
 
 }
